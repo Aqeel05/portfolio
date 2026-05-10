@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import heroImage from "@assets/a87a5e16-1a44-49f6-b0bf-2ab92caf0819_1771054769710.jpeg";
-import cosmosImage from "@assets/bc4e1da9-7c49-4e78-adfb-590d57236585_1771054769711.jpeg";
+import heroImage from "@assets/firstimage.jpg";
+import cosmosImage from "@assets/secondimage.jpg";
 
 const BRUSH_MIN = 8;
 const BRUSH_MAX = 80;
