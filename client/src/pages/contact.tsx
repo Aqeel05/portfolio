@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Send, Mail } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import cosmosImage from "@assets/bc4e1da9-7c49-4e78-adfb-590d57236585_1771054769711.jpeg";
+import cosmosImage from "@assets/secondimage.jpg";
 
 export default function Contact() {
   const [name, setName] = useState("");

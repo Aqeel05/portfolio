@@ -7,7 +7,7 @@ import {
   ArrowLeft, Monitor, Brain, Wifi, Cloud, Shield, Layers,
   TrendingUp, Guitar, Dumbbell, Lightbulb, Sparkles, Swords, Mail,
 } from "lucide-react";
-import cosmosImage from "@assets/bc4e1da9-7c49-4e78-adfb-590d57236585_1771054769711.jpeg";
+import cosmosImage from "@assets/secondimage.jpg";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
