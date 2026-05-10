@@ -233,7 +233,7 @@ export default function Home() {
       const bh = Math.round(rect.height * SCALE);
 
       if (brushCanvas && revealCanvas) {
-        const bctx = brushCanvas.getContext("2d");
+        const bctx = brushCanvas.getContext("2d", { willReadFrequently: true });
         const rctx = revealCanvas.getContext("2d");
         if (bctx && rctx) {
           if (brushCanvas.width !== bw || brushCanvas.height !== bh) {
