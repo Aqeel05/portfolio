@@ -17,6 +17,11 @@ const fadeUp = {
   }),
 };
 
+const sectionContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+
 const projects = [
   { title: "Student Activity Tracker", description: "A smart system that helps schools track student club activities, verify attendance, and automatically calculate participation points—making campus life management effortless.", tags: ["Full-Stack", "Education", "Automation"] },
   { title: "AI Bird Identifier", description: "An intelligent system that can look at a photo and instantly recognize whether it's an Eagle, Parrot, Owl, Peacock, or Penguin—teaching computers to see like humans do.", tags: ["AI", "Computer Vision", "Deep Learning"] },
@@ -105,7 +110,7 @@ export default function Accolades() {
       <div className="max-w-5xl mx-auto px-6 sm:px-10 md:px-14 pb-24">
         {/* About */}
         <section className="py-16 border-b border-white/10">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} className="space-y-8">
+          <motion.div variants={sectionContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} className="space-y-8">
             <motion.div custom={0} variants={fadeUp}>
               <p className="text-white/40 text-xs font-sans tracking-[0.3em] uppercase mb-4">About</p>
               <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-2" data-testid="text-professional-title">Engineer, Investor, Economist</h2>
@@ -126,7 +131,7 @@ export default function Accolades() {
         </section>
         {/* Projects */}
         <section className="py-16 border-b border-white/10">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}>
+          <motion.div variants={sectionContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}>
             <motion.div custom={0} variants={fadeUp} className="mb-10">
               <p className="text-white/40 text-xs font-sans tracking-[0.3em] uppercase mb-4">Portfolio</p>
               <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight" data-testid="text-projects-title">Projects</h2>
@@ -155,7 +160,7 @@ export default function Accolades() {
         </section>
         {/* Investment Track Record */}
         <section className="py-16 border-b border-white/10">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}>
+          <motion.div variants={sectionContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}>
             <motion.div custom={0} variants={fadeUp} className="mb-10">
               <p className="text-white/40 text-xs font-sans tracking-[0.3em] uppercase mb-4">Finance</p>
               <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight" data-testid="text-investment-title">Investment Track Record</h2>
@@ -190,7 +195,7 @@ export default function Accolades() {
         </section>
         {/* Skills */}
         <section className="py-16">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}>
+          <motion.div variants={sectionContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}>
             <motion.div custom={0} variants={fadeUp} className="mb-10">
               <p className="text-white/40 text-xs font-sans tracking-[0.3em] uppercase mb-4">Capabilities</p>
               <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight" data-testid="text-skills-title">What I Do</h2>
@@ -212,7 +217,7 @@ export default function Accolades() {
         </section>
         {/* P.S. */}
         <section className="py-16 border-b border-white/10">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} className="space-y-6">
+          <motion.div variants={sectionContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} className="space-y-6">
             <motion.div custom={0} variants={fadeUp}>
               <p className="text-white/40 text-xs font-sans tracking-[0.3em] uppercase mb-4">P.S.</p>
             </motion.div>
