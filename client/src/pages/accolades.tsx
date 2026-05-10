@@ -9,18 +9,21 @@ import {
 } from "lucide-react";
 import cosmosImage from "@assets/secondimage.jpg";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (i: number) => ({
-    opacity: 1, y: 0,
-    transition: { duration: 0.6, delay: i * 0.1, ease: "easeOut" },
-  }),
-};
+const VIEW = { once: true, margin: "-60px" };
 
-const sectionContainer = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
-};
+function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={VIEW}
+      transition={{ duration: 0.6, delay, ease: "easeOut" }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 const projects = [
   { title: "Student Activity Tracker", description: "A smart system that helps schools track student club activities, verify attendance, and automatically calculate participation points—making campus life management effortless.", tags: ["Full-Stack", "Education", "Automation"] },
@@ -107,129 +110,136 @@ export default function Accolades() {
           </div>
         </div>
       </div>
+
       <div className="max-w-5xl mx-auto px-6 sm:px-10 md:px-14 pb-24">
+
         {/* About */}
-        <section className="py-16 border-b border-white/10">
-          <motion.div variants={sectionContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} className="space-y-8">
-            <motion.div custom={0} variants={fadeUp}>
-              <p className="text-white/40 text-xs font-sans tracking-[0.3em] uppercase mb-4">About</p>
-              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-2" data-testid="text-professional-title">Engineer, Investor, Economist</h2>
-            </motion.div>
-            <motion.p custom={1} variants={fadeUp} className="text-white/70 text-base sm:text-lg leading-relaxed max-w-3xl font-sans" data-testid="text-about-description">Driven by a relentless pursuit of learning, problem-solving, and meaningful contribution to society. Every challenge is an opportunity to grow, and every solution is a chance to make an impact.</motion.p>
-            <motion.div custom={2} variants={fadeUp} className="flex flex-wrap items-center gap-4 text-white/50 text-sm font-sans">
+        <section className="py-16 border-b border-white/10 space-y-8">
+          <FadeUp delay={0}>
+            <p className="text-white/40 text-xs font-sans tracking-[0.3em] uppercase mb-4">About</p>
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-2" data-testid="text-professional-title">Engineer, Investor, Economist</h2>
+          </FadeUp>
+          <FadeUp delay={0.1}>
+            <p className="text-white/70 text-base sm:text-lg leading-relaxed max-w-3xl font-sans" data-testid="text-about-description">Driven by a relentless pursuit of learning, problem-solving, and meaningful contribution to society. Every challenge is an opportunity to grow, and every solution is a chance to make an impact.</p>
+          </FadeUp>
+          <FadeUp delay={0.2}>
+            <div className="flex flex-wrap items-center gap-4 text-white/50 text-sm font-sans">
               <span className="inline-flex items-center gap-2"><Swords className="w-4 h-4" />Boxing</span>
               <span className="text-white/20">|</span>
               <span className="inline-flex items-center gap-2"><Guitar className="w-4 h-4" />Guitar &amp; Piano</span>
               <span className="text-white/20">|</span>
               <span className="inline-flex items-center gap-2"><Dumbbell className="w-4 h-4" />Fitness</span>
-            </motion.div>
-            <motion.blockquote custom={3} variants={fadeUp} className="border-l-2 border-white/20 pl-6 py-2">
+            </div>
+          </FadeUp>
+          <FadeUp delay={0.3}>
+            <blockquote className="border-l-2 border-white/20 pl-6 py-2">
               <p className="text-white/60 text-sm sm:text-base italic font-serif leading-relaxed" data-testid="text-quote">"The undying conquest of knowledge in reality itself."</p>
               <p className="text-white/40 text-xs sm:text-sm font-sans mt-3 flex items-center gap-2"><Lightbulb className="w-3.5 h-3.5" />A love for solving complex problems requiring cognitive abilities—negotiations, tests, challenges.</p>
-            </motion.blockquote>
-          </motion.div>
+            </blockquote>
+          </FadeUp>
         </section>
+
         {/* Projects */}
         <section className="py-16 border-b border-white/10">
-          <motion.div variants={sectionContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}>
-            <motion.div custom={0} variants={fadeUp} className="mb-10">
-              <p className="text-white/40 text-xs font-sans tracking-[0.3em] uppercase mb-4">Portfolio</p>
-              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight" data-testid="text-projects-title">Projects</h2>
-            </motion.div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              {projects.map((project, i) => (
-                <motion.div key={project.title} custom={i + 1} variants={fadeUp}>
-                  <Card className="bg-white/[0.04] border-white/[0.08] h-full">
-                    <CardContent className="p-6 space-y-3">
-                      <div className="flex items-start gap-3">
-                        <Sparkles className="w-4 h-4 text-white/30 mt-1 shrink-0" />
-                        <h3 className="font-sans font-semibold text-white text-base sm:text-lg" data-testid={`text-project-title-${i}`}>{project.title}</h3>
-                      </div>
-                      <p className="text-white/50 text-sm leading-relaxed font-sans pl-7" data-testid={`text-project-desc-${i}`}>{project.description}</p>
-                      <div className="flex flex-wrap gap-2 pl-7">
-                        {project.tags.map((tag) => (
-                          <Badge key={tag} variant="outline" className="text-white/40 border-white/10 text-xs">{tag}</Badge>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+          <FadeUp delay={0} className="mb-10">
+            <p className="text-white/40 text-xs font-sans tracking-[0.3em] uppercase mb-4">Portfolio</p>
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight" data-testid="text-projects-title">Projects</h2>
+          </FadeUp>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {projects.map((project, i) => (
+              <FadeUp key={project.title} delay={i * 0.07}>
+                <Card className="bg-white/[0.04] border-white/[0.08] h-full">
+                  <CardContent className="p-6 space-y-3">
+                    <div className="flex items-start gap-3">
+                      <Sparkles className="w-4 h-4 text-white/30 mt-1 shrink-0" />
+                      <h3 className="font-sans font-semibold text-white text-base sm:text-lg" data-testid={`text-project-title-${i}`}>{project.title}</h3>
+                    </div>
+                    <p className="text-white/50 text-sm leading-relaxed font-sans pl-7" data-testid={`text-project-desc-${i}`}>{project.description}</p>
+                    <div className="flex flex-wrap gap-2 pl-7">
+                      {project.tags.map((tag) => (
+                        <Badge key={tag} variant="outline" className="text-white/40 border-white/10 text-xs">{tag}</Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </FadeUp>
+            ))}
+          </div>
         </section>
+
         {/* Investment Track Record */}
         <section className="py-16 border-b border-white/10">
-          <motion.div variants={sectionContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}>
-            <motion.div custom={0} variants={fadeUp} className="mb-10">
-              <p className="text-white/40 text-xs font-sans tracking-[0.3em] uppercase mb-4">Finance</p>
-              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight" data-testid="text-investment-title">Investment Track Record</h2>
-            </motion.div>
-            <motion.div custom={1} variants={fadeUp}>
-              <Card className="bg-white/[0.04] border-white/[0.08]">
-                <CardContent className="p-6 sm:p-8 space-y-6">
-                  <div className="flex items-center gap-3">
-                    <TrendingUp className="w-6 h-6 text-emerald-400/80" />
-                    <h3 className="font-sans font-semibold text-white text-lg sm:text-xl" data-testid="text-trader-title">Active Swing Trader</h3>
+          <FadeUp delay={0} className="mb-10">
+            <p className="text-white/40 text-xs font-sans tracking-[0.3em] uppercase mb-4">Finance</p>
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight" data-testid="text-investment-title">Investment Track Record</h2>
+          </FadeUp>
+          <FadeUp delay={0.1}>
+            <Card className="bg-white/[0.04] border-white/[0.08]">
+              <CardContent className="p-6 sm:p-8 space-y-6">
+                <div className="flex items-center gap-3">
+                  <TrendingUp className="w-6 h-6 text-emerald-400/80" />
+                  <h3 className="font-sans font-semibold text-white text-lg sm:text-xl" data-testid="text-trader-title">Active Swing Trader</h3>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="space-y-1">
+                    <p className="text-white/40 text-xs font-sans tracking-wider uppercase">Time-Weighted Returns</p>
+                    <p className="font-serif text-3xl sm:text-4xl font-bold text-emerald-400/90">
+                      <ScrambleNumber target={130} suffix="%" testId="text-returns" />
+                    </p>
+                    <p className="text-white/40 text-xs font-sans">Over the past year</p>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div className="space-y-1">
-                      <p className="text-white/40 text-xs font-sans tracking-wider uppercase">Time-Weighted Returns</p>
-                      <p className="font-serif text-3xl sm:text-4xl font-bold text-emerald-400/90">
-                        <ScrambleNumber target={130} suffix="%" testId="text-returns" />
-                      </p>
-                      <p className="text-white/40 text-xs font-sans">Over the past year</p>
-                    </div>
-                    <div className="space-y-1">
-                      <p className="text-white/40 text-xs font-sans tracking-wider uppercase">Portfolio Size</p>
-                      <p className="font-serif text-3xl sm:text-4xl font-bold text-white/80">
-                        <ScrambleNumber target={30} prefix="~" suffix="K SGD" testId="text-portfolio-size" />
-                      </p>
-                      <p className="text-white/40 text-xs font-sans">Technical analysis &amp; strategic positioning</p>
-                    </div>
+                  <div className="space-y-1">
+                    <p className="text-white/40 text-xs font-sans tracking-wider uppercase">Portfolio Size</p>
+                    <p className="font-serif text-3xl sm:text-4xl font-bold text-white/80">
+                      <ScrambleNumber target={30} prefix="~" suffix="K SGD" testId="text-portfolio-size" />
+                    </p>
+                    <p className="text-white/40 text-xs font-sans">Technical analysis &amp; strategic positioning</p>
                   </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </motion.div>
+                </div>
+              </CardContent>
+            </Card>
+          </FadeUp>
         </section>
+
         {/* Skills */}
-        <section className="py-16">
-          <motion.div variants={sectionContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}>
-            <motion.div custom={0} variants={fadeUp} className="mb-10">
-              <p className="text-white/40 text-xs font-sans tracking-[0.3em] uppercase mb-4">Capabilities</p>
-              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight" data-testid="text-skills-title">What I Do</h2>
-            </motion.div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {skills.map((skill, i) => (
-                <motion.div key={skill.label} custom={i + 1} variants={fadeUp}>
-                  <Card className="bg-white/[0.04] border-white/[0.08] h-full">
-                    <CardContent className="p-6 space-y-2">
-                      <skill.icon className="w-5 h-5 text-white/30 mb-2" />
-                      <h3 className="font-sans font-semibold text-white text-sm sm:text-base" data-testid={`text-skill-${i}`}>{skill.label}</h3>
-                      <p className="text-white/50 text-xs sm:text-sm leading-relaxed font-sans">{skill.detail}</p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </section>
-        {/* P.S. */}
         <section className="py-16 border-b border-white/10">
-          <motion.div variants={sectionContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} className="space-y-6">
-            <motion.div custom={0} variants={fadeUp}>
-              <p className="text-white/40 text-xs font-sans tracking-[0.3em] uppercase mb-4">P.S.</p>
-            </motion.div>
-            <motion.p custom={1} variants={fadeUp} className="text-white/70 text-base sm:text-lg leading-relaxed font-sans" data-testid="text-ps-intro">
+          <FadeUp delay={0} className="mb-10">
+            <p className="text-white/40 text-xs font-sans tracking-[0.3em] uppercase mb-4">Capabilities</p>
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight" data-testid="text-skills-title">What I Do</h2>
+          </FadeUp>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {skills.map((skill, i) => (
+              <FadeUp key={skill.label} delay={i * 0.07}>
+                <Card className="bg-white/[0.04] border-white/[0.08] h-full">
+                  <CardContent className="p-6 space-y-2">
+                    <skill.icon className="w-5 h-5 text-white/30 mb-2" />
+                    <h3 className="font-sans font-semibold text-white text-sm sm:text-base" data-testid={`text-skill-${i}`}>{skill.label}</h3>
+                    <p className="text-white/50 text-xs sm:text-sm leading-relaxed font-sans">{skill.detail}</p>
+                  </CardContent>
+                </Card>
+              </FadeUp>
+            ))}
+          </div>
+        </section>
+
+        {/* P.S. */}
+        <section className="py-16 space-y-6">
+          <FadeUp delay={0}>
+            <p className="text-white/40 text-xs font-sans tracking-[0.3em] uppercase mb-4">P.S.</p>
+          </FadeUp>
+          <FadeUp delay={0.1}>
+            <p className="text-white/70 text-base sm:text-lg leading-relaxed font-sans" data-testid="text-ps-intro">
               I am Aqeel, meaning <span className="italic text-white/90">wise</span> in the Arabic language. Feel free to navigate through my portfolio and contact me for any enquiries.{" "}
               <Link href="/contact"><span className="inline-flex items-center align-middle text-white/50 transition-colors duration-300 ml-1" data-testid="link-ps-email" aria-label="Send a message"><Mail className="w-4 h-4" /></span></Link>
-            </motion.p>
-            <motion.p custom={2} variants={fadeUp} className="text-white/50 text-sm sm:text-base leading-relaxed font-sans" data-testid="text-ps-philosophy">
+            </p>
+          </FadeUp>
+          <FadeUp delay={0.2}>
+            <p className="text-white/50 text-sm sm:text-base leading-relaxed font-sans" data-testid="text-ps-philosophy">
               A synergy of the practical and philosophical defines me, as I thrive in the world of bytes and dreams. If you're up for a captivating conversation on history, the cosmos, or the meaning of it all, I'm all ears.
-            </motion.p>
-          </motion.div>
+            </p>
+          </FadeUp>
         </section>
+
         <footer className="pt-10 pb-6 border-t border-white/10 text-center">
           <p className="text-white/30 text-xs font-sans tracking-wider">&copy; {new Date().getFullYear()} S.A. Aljunied</p>
         </footer>
