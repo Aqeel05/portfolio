@@ -9,14 +9,11 @@ import {
 } from "lucide-react";
 import cosmosImage from "@assets/secondimage.jpg";
 
-const VIEW = { once: true, margin: "-60px" };
-
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={VIEW}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay, ease: "easeOut" }}
       className={className}
     >
