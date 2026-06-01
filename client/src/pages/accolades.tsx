@@ -10,15 +10,33 @@ import {
 import cosmosImage from "@assets/secondimage.jpg";
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const fallback = setTimeout(() => setVisible(true), delay * 1000 + 800);
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setTimeout(() => setVisible(true), delay * 1000); observer.disconnect(); clearTimeout(fallback); } },
+      { threshold: 0.05 }
+    );
+    observer.observe(el);
+    return () => { observer.disconnect(); clearTimeout(fallback); };
+  }, [delay]);
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay, ease: "easeOut" }}
+    <div
+      ref={ref}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(16px)",
+        transition: "opacity 0.6s ease-out, transform 0.6s ease-out",
+      }}
       className={className}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
 
