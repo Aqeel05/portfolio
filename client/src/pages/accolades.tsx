@@ -221,16 +221,20 @@ export default function Accolades() {
             <p className="text-white/40 text-xs font-sans tracking-[0.3em] uppercase mb-4">Capabilities</p>
             <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight" data-testid="text-skills-title">What I Do</h2>
           </FadeUp>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {skills.map((skill, i) => (
               <FadeUp key={skill.label} delay={i * 0.07}>
-                <Card className="bg-white/[0.04] border-white/[0.08] h-full">
-                  <CardContent className="p-6 space-y-2">
-                    <skill.icon className="w-5 h-5 text-white/30 mb-2" />
-                    <h3 className="font-sans font-semibold text-white text-sm sm:text-base" data-testid={`text-skill-${i}`}>{skill.label}</h3>
-                    <p className="text-white/50 text-xs sm:text-sm leading-relaxed font-sans">{skill.detail}</p>
-                  </CardContent>
-                </Card>
+                <div className="group relative flex flex-col h-full overflow-hidden rounded-2xl border border-white/[0.07] bg-gradient-to-br from-white/[0.05] to-transparent p-6 gap-4 transition-all duration-300 hover:border-white/[0.15] hover:from-white/[0.07]">
+                  <div className="flex items-center justify-between">
+                    <div className="p-2 rounded-lg bg-white/[0.06] border border-white/[0.07]">
+                      <skill.icon className="w-4 h-4 text-white/50" />
+                    </div>
+                  </div>
+                  <div className="space-y-1.5">
+                    <h3 className="font-sans font-semibold text-white text-sm sm:text-base leading-snug" data-testid={`text-skill-${i}`}>{skill.label}</h3>
+                    <p className="text-white/40 text-xs sm:text-sm leading-relaxed font-sans">{skill.detail}</p>
+                  </div>
+                </div>
               </FadeUp>
             ))}
           </div>
