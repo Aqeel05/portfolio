@@ -2,10 +2,9 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import {
   ArrowLeft, Monitor, Brain, Wifi, Cloud, Shield, Layers,
-  TrendingUp, Guitar, Dumbbell, Lightbulb, Sparkles, Swords, Mail,
+  TrendingUp, Guitar, Dumbbell, Lightbulb, Swords, Mail,
 } from "lucide-react";
 import cosmosImage from "@assets/secondimage.jpg";
 
@@ -160,23 +159,23 @@ export default function Accolades() {
             <p className="text-white/40 text-xs font-sans tracking-[0.3em] uppercase mb-4">Portfolio</p>
             <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight" data-testid="text-projects-title">Projects</h2>
           </FadeUp>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {projects.map((project, i) => (
               <FadeUp key={project.title} delay={i * 0.07}>
-                <Card className="bg-white/[0.04] border-white/[0.08] h-full">
-                  <CardContent className="p-6 space-y-3">
-                    <div className="flex items-start gap-3">
-                      <Sparkles className="w-4 h-4 text-white/30 mt-1 shrink-0" />
-                      <h3 className="font-sans font-semibold text-white text-base sm:text-lg" data-testid={`text-project-title-${i}`}>{project.title}</h3>
-                    </div>
-                    <p className="text-white/50 text-sm leading-relaxed font-sans pl-7" data-testid={`text-project-desc-${i}`}>{project.description}</p>
-                    <div className="flex flex-wrap gap-2 pl-7">
-                      {project.tags.map((tag) => (
-                        <Badge key={tag} variant="outline" className="text-white/40 border-white/10 text-xs">{tag}</Badge>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+                <div className="group relative flex flex-col h-full overflow-hidden rounded-2xl border border-white/[0.07] bg-gradient-to-br from-white/[0.05] to-transparent p-6 gap-5 transition-all duration-300 hover:border-white/[0.15] hover:from-white/[0.07]">
+                  <span className="absolute top-4 right-5 text-6xl font-bold font-serif text-white/[0.04] select-none pointer-events-none leading-none">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div className="flex-1 space-y-2.5">
+                    <h3 className="font-sans font-semibold text-white text-base sm:text-lg leading-snug pr-10" data-testid={`text-project-title-${i}`}>{project.title}</h3>
+                    <p className="text-white/40 text-sm leading-relaxed font-sans" data-testid={`text-project-desc-${i}`}>{project.description}</p>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.tags.map((tag) => (
+                      <span key={tag} className="text-white/35 text-[11px] font-sans bg-white/[0.06] border border-white/[0.08] rounded-full px-2.5 py-0.5">{tag}</span>
+                    ))}
+                  </div>
+                </div>
               </FadeUp>
             ))}
           </div>
